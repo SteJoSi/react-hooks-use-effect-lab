@@ -9,8 +9,10 @@ function Question({ question, onAnswered }) {
     // console.log('Does this work?')
     setTimeRemaining(timeRemaining > 0 ? timeRemaining - 1 : timeRemaining) 
   }, 1000);
-    return () => clearTimeout(timer);
-  }, [timeRemaining]);
+    return function cleanup() {
+      clearTimeout(timer);
+    }
+  }, [timeRemaining, onAnswered]);
 
   useEffect(() => onAnswered(false))
   
